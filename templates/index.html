@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CropCare AI - AI Powered Disease Detection</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
+<body>
+
+  <!-- Header Section -->
+  <header>
+    <div class="logo">
+      <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="logo-img">
+      <h1>CropCare AI</h1>
+    </div>
+    <div class="navbar">
+      <a href="{{ url_for('check_schemes') }}">Check Government Schemes</a>
+      <a href="{{ url_for('about') }}">About us</a>
+    </div>
+  </header>
+
+  <!-- Popup Section -->
+  <div id="popup" style="display: none; justify-content: center; align-items: center; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.5);">
+    <div id="popup-message" style="background: white; padding: 20px; border-radius: 5px;">
+      <p>Welcome to CropCare AI! Let us help you detect plant diseases!</p>
+    </div>
+    <button onclick="closePopup()" style="background: red; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">Close</button>
+  </div>
+
+  <section id="weather">
+    <div class="weather-card">
+      <h2>Weather in {{ city }}</h2>
+      <p class="error" style="color: red;"></p>
+      <div class="weather-info">
+        <img src="{{ url_for('static', filename='weather.png') }}" alt="Weather Icon" class="weather-icon">
+        <div>
+          <p class="temperature">--°C</p>
+          <p class="description">--</p>
+        </div>
+      </div>
+      <div class="additional-info">
+        <p>Humidity: --%</p>
+        <p>Wind Speed: -- m/s</p>
+      </div>
+    </div>
+  </section>
+  
+
+  <!-- Hero Section -->
+  <section id="hero">
+    <div class="hero-content">
+      <h2>Try our AI Powered Disease Detection</h2>
+      <a href="#upload-section" class="hero-btn">Try Now</a>
+    </div>
+  </section>
+
+  <!-- How it Works Section -->
+  <section id="how-it-works">
+    <h2>How it works?</h2>
+    <div class="steps">
+      <div class="step">
+        <img src="{{ url_for('static', filename='camera.png') }}" alt="Camera Icon" class="step-icon">
+        <h3>Click a Pic</h3>
+        <p>Take a Picture of your plant leaf</p>
+        <button id="camera-button">Open Camera</button>
+        <video id="video" width="320" height="240" autoplay style="display: none;"></video>
+        <button id="capture-button" style="display: none;">Capture</button>
+        <canvas id="canvas" style="display: none;"></canvas>
+      </div>
+      <div class="step">
+        <img src="{{ url_for('static', filename='upload.png') }}" alt="Upload Icon" class="step-icon">
+        <h3>Upload on cropcare AI</h3>
+        <p>Upload your image to our platform</p>
+      </div>
+      <div class="step">
+        <img src="{{ url_for('static', filename='report.png') }}" alt="Report Icon" class="step-icon">
+        <h3>Get predicted disease</h3>
+        <p>Receive a detailed disease prediction</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Upload Section -->
+  <section id="upload-section">
+    <h3>Upload your plant image for disease detection</h3>
+    <form id="uploadForm" enctype="multipart/form-data" method="POST" action="{{ url_for('predict_route') }}">
+      <input type="file" name="crop-image" id="imageInput" accept="image/*" required />
+      <button type="submit">Predict Disease</button>
+    </form>
+    <p id="resultMessage"></p>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2024 CropCare AI. All rights reserved.</p>
+  </footer>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

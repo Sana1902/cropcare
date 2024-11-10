@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result - CropCare AI</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url("{{ url_for('static', filename='schemebgg.jpg') }}");
+            background-size: cover;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          background-color: #2d6a4f; /* Dark green with a slight earthy tone */
+          padding: 20px 40px;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); /* Subtle shadow for depth */
+        }
+        
+        header .logo {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+        
+        header .logo img {
+          width: 50px;
+          border-radius: 50%;
+        }
+        
+        header h1 {
+          color: #f1faee; /* Off-white color */
+          font-size: 1.8rem;
+          font-weight: bold;
+        }
+        
+        header .navbar {
+          display: flex;
+          gap: 20px;
+        }
+        
+        header .navbar a {
+          color: #f1faee;
+          text-decoration: none;
+          font-size: 1rem;
+          font-weight: 600;
+          padding: 10px 20px;
+          border-radius: 5px;
+          transition: background-color 0.3s ease, transform 0.3s ease;
+          background-color: #2a9d8f; /* Softer green background */
+        }
+        
+        header .navbar a:hover {
+          background: linear-gradient(45deg, #2d6a4f, #52b788); /* Gradient on hover */
+          transform: translateY(-3px); /* Lift effect */
+        }
+        
+        header .navbar a:active {
+          background-color: #1b4332; /* Darker green for active state */
+          transform: scale(0.98); /* Slight press effect */
+        }
+        
+        header .navbar a.selected {
+          background-color: #1b4332; /* Highlight the current page */
+          font-weight: bold;
+        }
+        /* Prediction Result Section */
+        #prediction-result {
+            padding: 50px 35px;
+            text-align: center;
+            max-width: 800px;
+            margin: 80px auto;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        #prediction-result h2 {
+            font-size: 38px;
+            margin-bottom: 20px;
+            color: #4CAF50;
+            font-weight: 600;
+        }
+
+        #prediction-result p {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        #prediction-result a {
+            display: inline-block;
+            font-size: 18px;
+            text-decoration: none;
+            padding: 12px 30px;
+            background-color: #4CAF50;
+            color: #fff;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        #prediction-result a:hover {
+            background-color: #45a049;
+            transform: translateY(-4px);
+        }
+
+        /* Disease Details Section */
+        .disease-details {
+            margin-top: 30px;
+            text-align: left;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .disease-details h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #2d6a4f;
+            font-weight: 600;
+            text-transform: capitalize;
+        }
+
+        .disease-details p {
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        .disease-details .subheading {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 25px 40px;
+            text-align: center;
+            width: 100%;
+            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            bottom: 0;
+            left: 0;
+        }
+
+        footer p {
+            font-size: 14px;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Additional Responsive Design */
+        @media (max-width: 768px) {
+            header .navbar {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            #prediction-result {
+                padding: 30px 20px;
+                margin: 50px 20px;
+            }
+
+            #prediction-result h2 {
+                font-size: 30px;
+            }
+
+            #prediction-result p {
+                font-size: 18px;
+            }
+
+            footer {
+              background-color: #1b4332;
+              color: #f1faee;
+              padding: 25px;
+              font-size: 0.9rem;
+              text-align: center;
+              border-top: 4px solid #2d6a4f;
+              box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+          }
+          
+        }
+
+        /* Apply fade-in animation */
+        #prediction-result {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <header class="d-flex justify-content-between align-items-center">
+      <div class="logo">
+        <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="logo-img">
+        <h1>CropCare AI</h1>
+      </div>
+        <div class="navbar">
+            <a href="{{ url_for('check_schemes') }}" class="btn btn-outline-light" aria-label="Check Government Schemes">Check Government Schemes</a>
+            <a href="{{ url_for('about') }}" class="btn btn-outline-light" aria-label="Learn More About Us">About Us</a>
+        </div>
+    </header>
+
+    <section id="prediction-result" class="container">
+        <h2>Prediction Result</h2>
+        <p><strong>Detected Disease:</strong> {{ prediction }}</p>
+        <p><strong>Phase of Disease:</strong> {{ disease_phase }}</p>
+        <p><strong>Recommendations:</strong> {{ recommendations }}</p>
+
+        <!-- Disease Details Section -->
+        <div class="disease-details">
+            <h3>Disease Details</h3>
+            <p><span class="subheading">Symptoms:</span> {{ disease_details['Symptoms'] }}</p>
+            <p><span class="subheading">Precautions:</span> {{ disease_details['Precautions'] }}</p>
+            <p><span class="subheading">Crop Management:</span> {{ disease_details['Crop Management'] }}</p>
+            <p><span class="subheading">Fertilizer Usage:</span> {{ disease_details['Fertilizer Usage'] }}</p>
+        </div>
+
+        <a href="{{ url_for('index') }}" class="btn btn-success" aria-label="Back to Home">Back to Home</a>
+    </section>
+  
+
+    <footer>
+        <p>&copy; 2024 CropCare AI. All rights reserved.</p>
+    </footer>
+    <!-- Bootstrap 5 JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

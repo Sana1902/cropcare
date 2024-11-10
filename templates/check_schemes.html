@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Check Government Schemes</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    /* Reset styling for consistency across browsers */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+  
+    /* Global Styles */
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: #444;
+      background-image: url("{{ url_for('static', filename='schemebgg.jpg') }}");
+      background-size: cover;
+      background-position: center;
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+  
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #2d6a4f; /* Dark green with a slight earthy tone */
+      padding: 20px 40px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); /* Subtle shadow for depth */
+    }
+    
+    header .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    header .logo img {
+      width: 50px;
+      border-radius: 50%;
+    }
+    
+    header h1 {
+      color: #f1faee; /* Off-white color */
+      font-size: 1.8rem;
+      font-weight: bold;
+    }
+    
+    header .navbar {
+      display: flex;
+      gap: 20px;
+    }
+    
+    header .navbar a {
+      color: #f1faee;
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 600;
+      padding: 10px 20px;
+      border-radius: 5px;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      background-color: #2a9d8f; /* Softer green background */
+    }
+    
+    header .navbar a:hover {
+      background: linear-gradient(45deg, #2d6a4f, #52b788); /* Gradient on hover */
+      transform: translateY(-3px); /* Lift effect */
+    }
+    
+    header .navbar a:active {
+      background-color: #1b4332; /* Darker green for active state */
+      transform: scale(0.98); /* Slight press effect */
+    }
+    
+    header .navbar a.selected {
+      background-color: #1b4332; /* Highlight the current page */
+      font-weight: bold;
+    }
+  
+    #schemes {
+      flex: 1;
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 40px;
+      background-color: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+    }
+  
+    h2 {
+      text-align: center;
+      color: #3a8a60;
+      font-size: 2.2em;
+      margin-bottom: 20px;
+    }
+  
+    p {
+      font-size: 1.1em; /* Increased font size */
+      color: #666;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+  
+    .schemes-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: space-between;
+    }
+  
+    .scheme-item {
+      flex: 1 1 calc(30% - 20px);
+      background-color: #eafaf1;
+      padding: 25px; /* Increased padding */
+      border: 1px solid #d0e6d9;
+      border-radius: 10px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+  
+    .scheme-item:hover {
+      transform: translateY(-5px); /* Subtle lift effect */
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    }
+  
+    .scheme-item h3 {
+      font-size: 1.7em; /* Increased heading size */
+      color: #3a8a60;
+      margin-bottom: 10px;
+    }
+  
+    .scheme-item p {
+      font-size: 1em;
+      line-height: 1.6; /* Improved line height */
+      color: #555;
+    }
+  
+    .redirect-button {
+      display: inline-block;
+      margin: 20px auto;
+      padding: 15px 35px; /* Adjusted padding */
+      color: white;
+      background-color: #3a8a60;
+      border: none;
+      border-radius: 5px;
+      font-size: 1.2em;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+  
+    .redirect-button:hover {
+      background-color: #349055;
+      transform: translateY(-2px);
+    }
+  
+    footer {
+      background-color: #1b4332;
+      color: #f1faee;
+      padding: 25px;
+      font-size: 0.9rem;
+      text-align: center;
+      border-top: 4px solid #2d6a4f;
+      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  
+    /* Media Queries */
+    @media (max-width: 768px) {
+      .scheme-item {
+        flex: 1 1 calc(45% - 20px);
+      }
+  
+      header h1 {
+        font-size: 2.2em;
+      }
+    }
+  
+    @media (max-width: 480px) {
+      .scheme-item {
+        flex: 1 1 100%;
+      }
+  
+      header h1 {
+        font-size: 1.8em;
+      }
+  
+      .redirect-button {
+        width: 100%;
+      }
+    }
+  </style>
+  
+</head>
+<body>
+
+  <!-- Header Section -->
+  <header class="d-flex justify-content-between align-items-center">
+    <div class="logo">
+      <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="logo-img">
+      <h1>CropCare AI</h1>
+    </div>
+      <div class="navbar">
+          <a href="{{ url_for('check_schemes') }}" class="btn btn-outline-light" aria-label="Check Government Schemes">Check Government Schemes</a>
+          <a href="{{ url_for('about') }}" class="btn btn-outline-light" aria-label="Learn More About Us">About Us</a>
+      </div>
+  </header>
+
+  <!-- Redirect Button -->
+  <a href="https://www.myscheme.gov.in/search/category/Agriculture,Rural%20&%20Environment" class="redirect-button" target="_blank">Visit MyScheme Website</a>
+
+  <!-- Government Schemes Section -->
+    <h2>Government Schemes</h2>
+    <p>Explore various government schemes available for farmers and agricultural development.</p>
+
+    <div class="schemes-list">
+      <div class="scheme-item">
+        <h3>Pradhan Mantri Krishi Sinchayee Yojana</h3>
+        <p>Enhances water use efficiency at the farm level through micro-irrigation techniques, including drip and sprinkler systems, to optimize water usage in farming.</p>
+      </div>
+      <div class="scheme-item">
+        <h3>Kisan Credit Card</h3>
+        <p>Offers affordable credit for agricultural activities with interest subsidies, including support for non-farm investment needs through an electronic credit system.</p>
+      </div>
+      <div class="scheme-item">
+        <h3>Agri-Clinics and Agri-Business Centres</h3>
+        <p>Encourages self-employment among agricultural graduates by providing start-up training, loans, and subsidies for agricultural extension services.</p>
+      </div>
+      <div class="scheme-item">
+        <h3>Krishi Unnati Yojana</h3>
+        <p>Promotes organic farming in the North Eastern Region, connecting farmers with consumers and building a certified organic production value chain.</p>
+      </div>
+      <div class="scheme-item">
+        <h3>Agricultural Marketing Infrastructure</h3>
+        <p>Supports storage and marketing infrastructure for farmers, offering subsidies to improve income and facilitate marketable produce processing.</p>
+      </div>
+      <div class="scheme-item">
+        <h3>National Mission on Natural Farming</h3>
+        <p>Focuses on natural farming practices, offering continuous handholding and capacity building to support farmer engagement and sustainable farming.</p>
+      </div>
+      <div class="scheme-item">
+        <h3>Sub Mission on Seed and Planting Material</h3>
+        <p>Enhances seed quality and production through technological and infrastructural advancements, improving productivity and returns for farmers.</p>
+      </div>
+      <div class="scheme-item">
+        <h3>Students READY</h3>
+        <p>Provides agriculture undergraduates with practical rural experience to foster entrepreneurial skills, aiming to enhance rural livelihoods.</p>
+      </div>
+      <div class="scheme-item">
+        <h3>Soil Health and Fertility Lab</h3>
+        <p>Enables rural entrepreneurs to set up soil testing labs at the village level with financial support for necessary equipment and consumables.</p>
+      </div>
+    </div>
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2024 CropCare AI. All rights reserved.</p>
+  </footer>
+

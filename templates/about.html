@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            color: #333;
+            padding: 20px;
+        }
+
+        /* Navbar */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #2d6a4f; /* Dark green with a slight earthy tone */
+            padding: 20px 40px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); /* Subtle shadow for depth */
+        }
+
+        header .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            position: relative;
+        }
+
+        /* Logo styling */
+        header .logo img {
+            width: 80px;
+            border-radius: 50%;
+            margin-top: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        header .logo img:hover {
+            transform: scale(1.1); /* Scale effect on hover */
+        }
+
+        header h1 {
+            color: #f1faee; /* Off-white color */
+            font-size: 2rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Text shadow for depth */
+            margin-left: 15px;
+        }
+
+        header .navbar {
+            display: flex;
+            gap: 20px;
+        }
+
+        header .navbar a {
+            color: #f1faee;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            background-color: #2a9d8f; /* Softer green background */
+        }
+
+        header .navbar a:hover {
+            background: linear-gradient(45deg, #2d6a4f, #52b788); /* Gradient on hover */
+            transform: translateY(-3px); /* Lift effect */
+        }
+
+        header .navbar a:active {
+            background-color: #1b4332; /* Darker green for active state */
+            transform: scale(0.98); /* Slight press effect */
+        }
+
+        header .navbar a.selected {
+            background-color: #1b4332; /* Highlight the current page */
+            font-weight: bold;
+        }
+
+        /* Container Styles */
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            transition: transform 0.2s;
+        }
+
+        .container:hover {
+            transform: scale(1.02);
+        }
+
+        h2 {
+            color: #3a8a60;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+            border-bottom: 2px solid #3a8a60;
+            padding-bottom: 5px;
+        }
+
+        p {
+            margin-bottom: 20px;
+            line-height: 1.7;
+            font-size: 1.1em;
+            color: #555;
+            text-align: justify;
+        }
+
+        footer {
+            background-color: #1b4332;
+            color: #f1faee;
+            padding: 25px;
+            font-size: 0.9rem;
+            text-align: center;
+            border-top: 4px solid #2d6a4f;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5em;
+            }
+
+            .container {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.6em;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #3a8a60;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f4f4f4;
+        }
+
+    </style>
+</head>
+<body>
+    <header class="d-flex justify-content-between align-items-center">
+        <div class="logo">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="CropCare AI Logo" class="logo-img">
+            <h1>CropCare AI</h1>
+        </div>
+        <div class="navbar">
+            <a href="{{ url_for('check_schemes') }}" class="btn btn-outline-light" aria-label="Check Government Schemes">Check Government Schemes</a>
+            <a href="{{ url_for('about') }}" class="btn btn-outline-light" aria-label="Learn More About Us">About Us</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <h2>Our Vision</h2>
+        <p>We are a team of dedicated professionals committed to advancing the field of agriculture through innovative technology solutions. Our vision is to harness the power of artificial intelligence and data analytics to enhance agricultural practices and contribute to a sustainable future.</p>
+        
+        <h2>Our Expertise</h2>
+        <p>Our team comprises experts in artificial intelligence, machine learning, and agricultural science. We bring together a diverse range of skills and experiences to address complex challenges in the agricultural sector. Our commitment to research and development drives us to continuously improve our methodologies and solutions.</p>
+        
+        <h2>Our Commitment</h2>
+        <p>We are passionate about empowering farmers and agricultural stakeholders by providing them with the tools and insights necessary to make informed decisions. Our dedication to excellence and innovation ensures that we remain at the forefront of technology in agriculture, fostering resilience and productivity in farming practices.</p>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 CropCare AI. All rights reserved.</p>
+    </footer>
+</body>
+</html>
