@@ -1,0 +1,18 @@
+# Web framework
+Flask==2.1.1           # For Flask-based backend
+
+# Machine Learning
+tensorflow==2.10.0     # For machine learning model (choose TensorFlow or PyTorch)
+pygame
+
+# Utilities
+numpy==1.23.1           # For numerical operations
+pandas==1.4.3           # For data handling and analysis
+scikit-learn==1.1.1     # For additional machine learning utilities
+
+# Image Processing
+Pillow==9.2.0           # For image processing and handling
+
+# API Requests
+requests==2.28.1        # For making HTTP requests (if needed)
+
