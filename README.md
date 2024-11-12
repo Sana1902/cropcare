@@ -26,10 +26,8 @@ CropCare leverages machine learning and real-time data analysis to identify crop
 - **Frontend**: React (for web), React Native (for mobile)
 - **Backend**: Flask/Django
 - **Machine Learning**: TensorFlow/PyTorch for disease prediction
-- **Database**: PostgreSQL for relational data, Redis for caching
-- **Containerization**: Docker, Kubernetes (for deployment)
-- **Message Queues**: Kafka, RabbitMQ (for data streaming and communication)
-- **Computer Vision**: OpenCV, YOLO (for image processing and disease detection)
+- **Database**: PostgreSQL for relational data
+- **Computer Vision**: OpenCV(for image processing and disease detection)
 
 ## 📝 Getting Started
 
