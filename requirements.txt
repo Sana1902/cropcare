@@ -7,4 +7,4 @@ pandas==2.0.3
 cython==0.29.36
 pygame==2.6.1
 Werkzeug==2.3.4
-pillow
+Pillow
